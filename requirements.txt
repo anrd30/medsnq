@@ -1,0 +1,5 @@
+llama-cpp-python>=0.2.50
+streamlit>=1.30.0
+pandas>=2.0.0
+huggingface-hub>=0.20.0
+tqdm>=4.66.0
