@@ -473,8 +473,8 @@ def main():
     print(f"Using device: {device}\n")
     
     # Load model
-    print("Loading TinyLlama-1.1B...")
-    model_name = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+    print("Loading MEDFIT-LLM-3B...")
+    model_name = "adityak74/medfit-llm-3B"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
@@ -510,11 +510,18 @@ def main():
     uniform_q4_map = {name: 4 for name in mednsq_map.keys()}
     
     # Reload model (to reset from baseline)
+    del model  # Free memory
+    import gc
+    gc.collect()
+    torch.cuda.empty_cache()
+    
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
         torch_dtype=torch.float16 if device == "cuda" else torch.float32,
         device_map="auto" if device == "cuda" else None
     )
+    if device == "cuda":
+        model = model.to(device)
     
     model = simulate_quantization_impact(model, uniform_q4_map, noise_scale=0.02)
     accuracy_q4, results_q4 = evaluate_model(
@@ -528,11 +535,18 @@ def main():
     print("="*60)
     
     # Reload model again
+    del model  # Free memory
+    import gc
+    gc.collect()
+    torch.cuda.empty_cache()
+    
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
         torch_dtype=torch.float16 if device == "cuda" else torch.float32,
         device_map="auto" if device == "cuda" else None
     )
+    if device == "cuda":
+        model = model.to(device)
     
     model = simulate_quantization_impact(model, mednsq_map, noise_scale=0.02)
     accuracy_mednsq, results_mednsq = evaluate_model(
