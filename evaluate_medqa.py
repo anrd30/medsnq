@@ -17,8 +17,142 @@ import json
 from typing import List, Dict
 import numpy as np
 
-# Sample MedQA questions (in real scenario, download full dataset)
-MEDQA_QUESTIONS = [
+def load_full_medqa():
+    """Load full MedQA dataset from bigbio."""
+    import json
+    import os
+    from pathlib import Path
+    
+    # Direct path to cached US test file (we found this earlier)
+    cache_base = Path.home() / ".cache" / "huggingface" / "datasets" / "downloads" / "extracted"
+    
+    # Find the MedQA extraction directory
+    test_file = None
+    if cache_base.exists():
+        for extracted_dir in cache_base.iterdir():
+            if extracted_dir.is_dir():
+                us_test = extracted_dir / "data_clean" / "questions" / "US" / "test.jsonl"
+                if us_test.exists():
+                    test_file = us_test
+                    break
+    
+    if test_file and test_file.exists():
+        print(f"[INFO] Loading questions from cached file: {test_file}")
+        questions = []
+        try:
+            with open(test_file, 'r', encoding='utf-8') as f:
+                for line_num, line in enumerate(f):
+                    try:
+                        item = json.loads(line.strip())
+                        # Extract question, options, answer
+                        question_text = item.get('question', '')
+                        if not question_text:
+                            continue
+                        
+                        # Options is already a dict with 'A', 'B', 'C', 'D', etc.
+                        options_dict = item.get('options', {})
+                        if not options_dict or len(options_dict) < 4:
+                            continue
+                        
+                        # Take first 4 options (A, B, C, D)
+                        options = {k: options_dict[k] for k in ['A', 'B', 'C', 'D'] if k in options_dict}
+                        if len(options) < 4:
+                            continue
+                        
+                        # Get answer - answer_idx is a string like 'C'
+                        answer_letter = item.get('answer_idx', '')
+                        if not answer_letter or answer_letter not in ['A', 'B', 'C', 'D']:
+                            # Try to get from 'answer' field
+                            answer_data = item.get('answer', '')
+                            if isinstance(answer_data, str) and len(answer_data) == 1:
+                                answer_letter = answer_data.upper()
+                            elif isinstance(answer_data, list) and len(answer_data) > 0:
+                                answer_letter = chr(65 + int(answer_data[0])) if isinstance(answer_data[0], int) else str(answer_data[0]).upper()
+                            else:
+                                continue
+                        
+                        if answer_letter not in ['A', 'B', 'C', 'D']:
+                            continue
+                        
+                        questions.append({
+                            "question": question_text,
+                            "options": options,
+                            "answer": answer_letter,
+                            "explanation": item.get('explanation', '')
+                        })
+                    except Exception as e:
+                        # Skip malformed items
+                        continue
+            
+            print(f"[OK] Loaded {len(questions)} valid questions from cache")
+            return questions
+        except Exception as e:
+            print(f"[ERROR] Failed to read cached file: {e}")
+    
+    # Fallback: try loading via datasets library
+    try:
+        from datasets import load_dataset
+        ds = load_dataset('bigbio/med_qa', 'med_qa_en_bigbio_qa')
+        
+        questions = []
+        test_split = ds.get('test', None)
+        if test_split is None:
+            for key in ds.keys():
+                if len(ds[key]) > 0:
+                    test_split = ds[key]
+                    break
+        
+        if test_split is None:
+            print("[ERROR] No test split found in dataset")
+            return []
+        
+        print(f"[INFO] Loading {len(test_split)} questions from MedQA dataset...")
+        
+        for item in test_split:
+            try:
+                question_text = item.get('question', '')
+                if not question_text:
+                    continue
+                    
+                choices = item.get('choices', [])
+                if not choices or len(choices) < 4:
+                    continue
+                
+                answer_data = item.get('answer', [])
+                if isinstance(answer_data, list) and len(answer_data) > 0:
+                    answer_idx = answer_data[0] if isinstance(answer_data[0], int) else 0
+                elif isinstance(answer_data, str):
+                    answer_idx = ord(answer_data.upper()) - ord('A') if len(answer_data) == 1 else 0
+                else:
+                    answer_idx = 0
+                
+                if answer_idx < 0 or answer_idx >= len(choices):
+                    answer_idx = 0
+                
+                questions.append({
+                    "question": question_text,
+                    "options": {
+                        chr(65+i): choice for i, choice in enumerate(choices[:4])
+                    },
+                    "answer": chr(65 + answer_idx),
+                    "explanation": item.get('explanation', '')
+                })
+            except Exception:
+                continue
+        
+        print(f"[OK] Loaded {len(questions)} valid questions")
+        return questions
+    except Exception as e:
+        print(f"[ERROR] Failed to load dataset: {e}")
+        return []
+
+# Load full MedQA dataset
+MEDQA_QUESTIONS = load_full_medqa()
+
+# Fallback to sample questions if dataset loading failed
+if not MEDQA_QUESTIONS:
+    print("[WARNING] Using sample questions as fallback")
+    MEDQA_QUESTIONS = [
     {
         "question": "A 55-year-old woman with type 2 diabetes presents with a painless foot ulcer. Physical examination shows decreased sensation in both feet. What is the most likely underlying cause?",
         "options": {
@@ -353,9 +487,9 @@ def main():
     try:
         with open("mednsq_precision_map.json", "r") as f:
             mednsq_map = json.load(f)
-        print(f"✓ Loaded precision map with {len(mednsq_map)} parameters\n")
+        print(f"[OK] Loaded precision map with {len(mednsq_map)} parameters\n")
     except FileNotFoundError:
-        print("❌ mednsq_precision_map.json not found. Run mednsq.py first.")
+        print("[ERROR] mednsq_precision_map.json not found. Run mednsq.py first.")
         return
     
     # Test 1: Baseline (FP16, no quantization)
@@ -365,7 +499,7 @@ def main():
     accuracy_baseline, results_baseline = evaluate_model(
         model, tokenizer, MEDQA_QUESTIONS, device
     )
-    print(f"\n✓ Baseline Accuracy: {accuracy_baseline*100:.1f}%")
+    print(f"\n[OK] Baseline Accuracy: {accuracy_baseline*100:.1f}%")
     
     # Test 2: Uniform Q4 (simulated)
     print("\n" + "="*60)
@@ -386,7 +520,7 @@ def main():
     accuracy_q4, results_q4 = evaluate_model(
         model, tokenizer, MEDQA_QUESTIONS, device
     )
-    print(f"\n✓ Uniform Q4 Accuracy: {accuracy_q4*100:.1f}%")
+    print(f"\n[OK] Uniform Q4 Accuracy: {accuracy_q4*100:.1f}%")
     
     # Test 3: MedNSQ (our approach)
     print("\n" + "="*60)
@@ -404,7 +538,7 @@ def main():
     accuracy_mednsq, results_mednsq = evaluate_model(
         model, tokenizer, MEDQA_QUESTIONS, device
     )
-    print(f"\n✓ MedNSQ Accuracy: {accuracy_mednsq*100:.1f}%")
+    print(f"\n[OK] MedNSQ Accuracy: {accuracy_mednsq*100:.1f}%")
     
     # Summary
     print("\n" + "="*60)
@@ -423,15 +557,15 @@ def main():
     
     if accuracy_mednsq > accuracy_q4:
         improvement = (accuracy_mednsq - accuracy_q4) * 100
-        print(f"\n✅ MedNSQ OUTPERFORMS Uniform Q4 by {improvement:.1f} percentage points!")
+        print(f"\n[SUCCESS] MedNSQ OUTPERFORMS Uniform Q4 by {improvement:.1f} percentage points!")
         print(f"   Despite being {3.21/4*100:.1f}% of the size")
         print(f"   This validates our medical-aware approach!")
     elif accuracy_mednsq == accuracy_q4:
-        print(f"\n⚠️  MedNSQ equals Uniform Q4 (both {accuracy_mednsq*100:.1f}%)")
+        print(f"\n[WARNING] MedNSQ equals Uniform Q4 (both {accuracy_mednsq*100:.1f}%)")
         print(f"   Need more questions or larger model to see difference")
     else:
         decline = (accuracy_q4 - accuracy_mednsq) * 100
-        print(f"\n❌ MedNSQ underperforms by {decline:.1f} percentage points")
+        print(f"\n[FAIL] MedNSQ underperforms by {decline:.1f} percentage points")
         print(f"   Medical-aware approach may need refinement")
     
     # Save results
@@ -444,7 +578,7 @@ def main():
     with open("medqa_evaluation_results.json", "w") as f:
         json.dump(results_summary, f, indent=2)
     
-    print(f"\n✓ Detailed results saved to medqa_evaluation_results.json")
+    print(f"\n[OK] Detailed results saved to medqa_evaluation_results.json")
 
 
 if __name__ == "__main__":

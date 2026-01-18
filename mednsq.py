@@ -152,7 +152,7 @@ class MedNSQ:
         }
         
         self.model.eval()
-        print(f"\n✓ Computed saliency for {len(self.neuron_saliency)} parameter groups")
+        print(f"\n[OK] Computed saliency for {len(self.neuron_saliency)} parameter groups")
         
         return self.neuron_saliency
     
@@ -280,7 +280,7 @@ class MedNSQ:
         """Save precision map to JSON for later use."""
         with open(output_path, 'w') as f:
             json.dump(self.precision_map, f, indent=2)
-        print(f"✓ Saved precision map to {output_path}")
+        print(f"[OK] Saved precision map to {output_path}")
     
     def get_compression_stats(self) -> Dict:
         """Calculate expected compression from mixed precision."""
@@ -322,15 +322,15 @@ class MedNSQ:
 
 
 def main():
-    """Run MedNSQ analysis on BioMistral."""
+    """Run MedNSQ analysis on TinyLlama."""
     print("\n" + "="*60)
     print("MedNSQ: Medical Neuron Saliency Quantization")
     print("="*60 + "\n")
     
-    # Initialize with BioMistral in 4-bit to fit in 6GB VRAM
+    # Initialize with TinyLlama-1.1B (small enough to fit without 4-bit)
     mednsq = MedNSQ(
-        model_name="BioMistral/BioMistral-7B",
-        load_in_4bit=True
+        model_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        load_in_4bit=False
     )
     
     # Step 1: Compute neuron saliency
@@ -348,10 +348,10 @@ def main():
     # Step 4: Get compression stats
     mednsq.get_compression_stats()
     
-    # Step 5: Save precision map
-    mednsq.save_precision_map("biomistral_mednsq_precision_map.json")
+    # Step 5: Save precision map (expected by evaluate_medqa.py)
+    mednsq.save_precision_map("mednsq_precision_map.json")
     
-    print("\n✓ Med NSQ analysis complete!")
+    print("\n[OK] Med NSQ analysis complete!")
 
 
 if __name__ == "__main__":
