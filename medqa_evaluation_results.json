@@ -1,0 +1,437 @@
+{
+  "baseline": {
+    "accuracy": 0.25,
+    "results": [
+      {
+        "question": "A 55-year-old woman with type 2 diabetes presents ...",
+        "correct_answer": "C",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) VENOUS INSUFFICIENCY"
+      },
+      {
+        "question": "A 28-year-old man presents with burning on urinati...",
+        "correct_answer": "B",
+        "predicted": "B",
+        "correct": true,
+        "response": "B) CHLAMYDIA TRACHOM"
+      },
+      {
+        "question": "A 45-year-old woman presents with fatigue, weight ...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) HYPERTHYROIDISM"
+      },
+      {
+        "question": "A 60-year-old man with a history of smoking presen...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) ADENOCARCINOMA"
+      },
+      {
+        "question": "A 25-year-old woman presents with palpitations, we...",
+        "correct_answer": "B",
+        "predicted": "B",
+        "correct": true,
+        "response": "B) GRAVES DISEASE\n\nQUESTION:"
+      },
+      {
+        "question": "A 70-year-old man presents with progressive memory...",
+        "correct_answer": "C",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) DOPAMINERGIC"
+      },
+      {
+        "question": "A 35-year-old woman presents with joint pain, mala...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) RHEUMATOID ARTH"
+      },
+      {
+        "question": "A newborn presents with projectile vomiting after ...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) INTUSSUSCEPTION"
+      },
+      {
+        "question": "A 50-year-old alcoholic presents with confusion, a...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) VITAMIN B12"
+      },
+      {
+        "question": "A 40-year-old woman presents with sudden 'worst he...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) MRI BRAIN\n\nCORRECT"
+      },
+      {
+        "question": "A 5-year-old child presents with honey-crusted les...",
+        "correct_answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "response": "A) STREPTOCOCCUS PYOGEN"
+      },
+      {
+        "question": "A patient with chronic kidney disease presents wit...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) PRIMARY HYPERPARATHYROIDISM"
+      },
+      {
+        "question": "A 30-year-old presents with recurrent kidney stone...",
+        "correct_answer": "D",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) PRIMARY HYPERPARATHYROIDISM"
+      },
+      {
+        "question": "A patient presents with microcytic anemia and koil...",
+        "correct_answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "response": "A) IRON\nCORRECT. IRON DEF"
+      },
+      {
+        "question": "A patient with HIV presents with multiple purple s...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) MELANOMA\n\nCORRECT"
+      },
+      {
+        "question": "A patient presents with painful swollen big toe an...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) ALLOPURINOL"
+      },
+      {
+        "question": "A pregnant woman at 20 weeks has elevated AFP and ...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) SPINA BIFIDA"
+      },
+      {
+        "question": "A patient presents with painful vesicular rash in ...",
+        "correct_answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "response": "A) ANTIBIOTICS\n\nCOR"
+      },
+      {
+        "question": "A patient with COPD presents with worsening shortn...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) INCREASE OXYGEN"
+      },
+      {
+        "question": "A child presents with barking cough and inspirator...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) EPIGLOTTITIS"
+      }
+    ]
+  },
+  "uniform_q4": {
+    "accuracy": 0.15,
+    "results": [
+      {
+        "question": "A 55-year-old woman with type 2 diabetes presents ...",
+        "correct_answer": "C",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) VENOUS INSUFFICIENCY"
+      },
+      {
+        "question": "A 28-year-old man presents with burning on urinati...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) CHLAMYDIA TRACHOM"
+      },
+      {
+        "question": "A 45-year-old woman presents with fatigue, weight ...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) HYPERTHYROIDISM"
+      },
+      {
+        "question": "A 60-year-old man with a history of smoking presen...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) ADENOCARCINOMA"
+      },
+      {
+        "question": "A 25-year-old woman presents with palpitations, we...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) GRAVES DISEASE\n\nCORRECT"
+      },
+      {
+        "question": "A 70-year-old man presents with progressive memory...",
+        "correct_answer": "C",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) DOPAMINERGIC"
+      },
+      {
+        "question": "A 35-year-old woman presents with joint pain, mala...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) RHEUMATOID ARTH"
+      },
+      {
+        "question": "A newborn presents with projectile vomiting after ...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) INTUSSUSCEPTION"
+      },
+      {
+        "question": "A 50-year-old alcoholic presents with confusion, a...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) VITAMIN B12"
+      },
+      {
+        "question": "A 40-year-old woman presents with sudden 'worst he...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) MRI BRAIN\n\nCORRECT"
+      },
+      {
+        "question": "A 5-year-old child presents with honey-crusted les...",
+        "correct_answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "response": "A) STREPTOCOCCUS PYOGEN"
+      },
+      {
+        "question": "A patient with chronic kidney disease presents wit...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) PRIMARY HYPERPARATHYROIDISM"
+      },
+      {
+        "question": "A 30-year-old presents with recurrent kidney stone...",
+        "correct_answer": "D",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) PRIMARY HYPERPARATHYROIDISM"
+      },
+      {
+        "question": "A patient presents with microcytic anemia and koil...",
+        "correct_answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "response": "A) IRON\nCORRECT. IRON DEF"
+      },
+      {
+        "question": "A patient with HIV presents with multiple purple s...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) MELANOMA\n\nCORRECT"
+      },
+      {
+        "question": "A patient presents with painful swollen big toe an...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) ALLOPURINOL"
+      },
+      {
+        "question": "A pregnant woman at 20 weeks has elevated AFP and ...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) SPINA BIFIDA"
+      },
+      {
+        "question": "A patient presents with painful vesicular rash in ...",
+        "correct_answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "response": "A) ANTIBIOTICS\n\nCOR"
+      },
+      {
+        "question": "A patient with COPD presents with worsening shortn...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) INCREASE OXYGEN"
+      },
+      {
+        "question": "A child presents with barking cough and inspirator...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) EPIGLOTTITIS"
+      }
+    ]
+  },
+  "mednsq": {
+    "accuracy": 0.3,
+    "results": [
+      {
+        "question": "A 55-year-old woman with type 2 diabetes presents ...",
+        "correct_answer": "C",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) VENOUS INSUFFICIENCY"
+      },
+      {
+        "question": "A 28-year-old man presents with burning on urinati...",
+        "correct_answer": "B",
+        "predicted": "B",
+        "correct": true,
+        "response": "B) CHLAMYDIA TRACHOM"
+      },
+      {
+        "question": "A 45-year-old woman presents with fatigue, weight ...",
+        "correct_answer": "B",
+        "predicted": "C",
+        "correct": false,
+        "response": "C) DIABETES MELLITUS"
+      },
+      {
+        "question": "A 60-year-old man with a history of smoking presen...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) ADENOCARCINOMA"
+      },
+      {
+        "question": "A 25-year-old woman presents with palpitations, we...",
+        "correct_answer": "B",
+        "predicted": "B",
+        "correct": true,
+        "response": "B) GRAVES DISEASE\n\nQUESTION:"
+      },
+      {
+        "question": "A 70-year-old man presents with progressive memory...",
+        "correct_answer": "C",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) DOPAMINERGIC"
+      },
+      {
+        "question": "A 35-year-old woman presents with joint pain, mala...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) RHEUMATOID ARTH"
+      },
+      {
+        "question": "A newborn presents with projectile vomiting after ...",
+        "correct_answer": "B",
+        "predicted": "B",
+        "correct": true,
+        "response": "B) PYLORIC STENOSIS"
+      },
+      {
+        "question": "A 50-year-old alcoholic presents with confusion, a...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) VITAMIN B12\nCOR"
+      },
+      {
+        "question": "A 40-year-old woman presents with sudden 'worst he...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) MRI BRAIN\n\nCORRECT"
+      },
+      {
+        "question": "A 5-year-old child presents with honey-crusted les...",
+        "correct_answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "response": "A) STREPTOCOCCUS PYOGEN"
+      },
+      {
+        "question": "A patient with chronic kidney disease presents wit...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) PRIMARY HYPERPARATHYROIDISM"
+      },
+      {
+        "question": "A 30-year-old presents with recurrent kidney stone...",
+        "correct_answer": "D",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) PRIMARY HYPERPARATHYROIDISM"
+      },
+      {
+        "question": "A patient presents with microcytic anemia and koil...",
+        "correct_answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "response": "A) IRON\nCORRECT. IRON DEF"
+      },
+      {
+        "question": "A patient with HIV presents with multiple purple s...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) MELANOMA\n\nCORRECT"
+      },
+      {
+        "question": "A patient presents with painful swollen big toe an...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) ALLOPURINOL"
+      },
+      {
+        "question": "A pregnant woman at 20 weeks has elevated AFP and ...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) SPINA BIFIDA"
+      },
+      {
+        "question": "A patient presents with painful vesicular rash in ...",
+        "correct_answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "response": "A) ANTIBIOTICS\n\nCOR"
+      },
+      {
+        "question": "A patient with COPD presents with worsening shortn...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) INCREASE OXYGEN"
+      },
+      {
+        "question": "A child presents with barking cough and inspirator...",
+        "correct_answer": "B",
+        "predicted": "A",
+        "correct": false,
+        "response": "A) EPIGLOTTITIS"
+      }
+    ]
+  }
+}
