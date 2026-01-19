@@ -322,14 +322,14 @@ class MedNSQ:
 
 
 def main():
-    """Run MedNSQ analysis on TinyLlama."""
+    """Run MedNSQ analysis on MedGemma."""
     print("\n" + "="*60)
     print("MedNSQ: Medical Neuron Saliency Quantization")
     print("="*60 + "\n")
     
-    # Initialize with TinyLlama-1.1B (small enough to fit without 4-bit)
+    # Initialize with MEDFIT-LLM-3B (smaller medical model, fine-tuned from Llama-3.2)
     mednsq = MedNSQ(
-        model_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        model_name="adityak74/medfit-llm-3B",
         load_in_4bit=False
     )
     
